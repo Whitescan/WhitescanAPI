@@ -6,8 +6,8 @@ This project uses Java 17
 
 # Minecraft Version
 Supported Minecraft (Java 1.18.2) Versions:
-- BungeeCord
-- Bukkit
+- BungeeCord (Waterfall recommended)
+- Bukkit (Spigot recommended)
 
 # Features
 Manage multiple config's without hassle:
