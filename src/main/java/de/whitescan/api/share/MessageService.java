@@ -19,12 +19,17 @@ public class MessageService {
 	/**
 	 * Pattern for HEX codes
 	 */
-	public static final Pattern HEX_PATTERN = Pattern.compile("#[a-fA-F0-9]{6}");
+	private static final Pattern HEX_PATTERN = Pattern.compile("#[a-fA-F0-9]{6}");
+
+	/**
+	 * The networks name
+	 */
+	public static final String RAW_PREFIX = "§4§lE§8§ln§4§ld§8§lu§4§lr§8§li§4§lo§8§ln";
 
 	/**
 	 * Root Prefix
 	 */
-	private static final String PROXY_PREFIX = "§4§lE§8§ln§4§ld§8§lu§4§lr§8§li§4§lo§8§ln §f§l» §e";
+	private static final String PROXY_PREFIX = RAW_PREFIX + " §f§l» §e";
 
 	/**
 	 * Prefix for errors
