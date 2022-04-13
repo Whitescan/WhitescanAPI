@@ -19,6 +19,10 @@ public abstract class BungeeCommand extends Command implements TabExecutor {
 		super(name, permission, aliases);
 	}
 
+	public BungeeCommand(String name, String permission) {
+		super(name, permission, new String[] {});
+	}
+
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 
