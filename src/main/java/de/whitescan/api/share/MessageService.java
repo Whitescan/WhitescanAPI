@@ -61,7 +61,7 @@ public class MessageService {
 	/**
 	 * Message used when the target player exists, but is not available to the sender
 	 */
-	public static final TextComponent TARGET_UNAVAILABLE = createErrorMessage("This player is currently unavailable...");
+	public static final TextComponent TARGET_NOT_AVAILABLE = createErrorMessage("This player is currently unavailable...");
 
 	/**
 	 * Message used when target is the actor
