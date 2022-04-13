@@ -7,7 +7,9 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ClickEvent.Action;
+import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Text;
 
 /**
  *
@@ -85,6 +87,13 @@ public class MessageService {
 		return textComponent;
 	}
 
+	public static TextComponent createMessage(String message, ClickEvent.Action action, String clickText, String hoverText) {
+		TextComponent textComponent = new TextComponent(message);
+		textComponent.setClickEvent(new ClickEvent(action, clickText));
+		textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(hoverText)));
+		return textComponent;
+	}
+
 	/**
 	 * Method used when displaying a custom error message
 	 *
@@ -135,21 +144,21 @@ public class MessageService {
 	 * Message used when an input string contains invalid characters
 	 */
 	public static TextComponent createInvalidStringInputMessage() {
-		return createErrorMessage("Diese Eingabe lässt nur Symbole des deutschen Tastatur-Layouts zu!");
+		return createErrorMessage("This input only accepts characters of the english keyboard-layout!");
 	}
 
 	/**
 	 * Message used when an input string contains invalid characters
 	 */
 	public static TextComponent createInvalidStringInputMessage(int size) {
-		return createErrorMessage("Diese Eingabe lässt nur Symbole des deutschen Tastatur-Layouts mit maximal " + size + " Zeichen zu!");
+		return createErrorMessage("This input only accepts characters of the english keyboard-layout and a maximum of " + size + " characters!");
 	}
 
 	/**
 	 * Message used when an input key contains invalid characters
 	 */
 	public static TextComponent createInvalidKeyInputMessage(int size) {
-		return createErrorMessage("Diese Eingabe lässt nur Buchstaben(a-Z, üöäßẞ) und Zahlen(0-9) mit maximal " + size + " Zeichen zu!");
+		return createErrorMessage("This input only accepts non-special characters of the english keyboard-layout and a maximum of " + size + " characters!");
 	}
 
 	/**
@@ -157,6 +166,10 @@ public class MessageService {
 	 */
 	public static TextComponent createInvalidDurationInputMessage() {
 		return createErrorMessage("This input only accepts durations!");
+	}
+
+	public static TextComponent createInvalidDurationInputMessage(int size) {
+		return createErrorMessage("This input only accepts durations with a size of " + size + " characters!");
 	}
 
 	/**
@@ -180,6 +193,19 @@ public class MessageService {
 		TextComponent textComponent = createErrorMessage("Wrong arguments, try §a" + help);
 		textComponent.setClickEvent(new ClickEvent(Action.SUGGEST_COMMAND, help));
 		return textComponent;
+	}
+
+	public static TextComponent createCommandTextComponent(String message, String command) {
+
+		if (command.startsWith("/"))
+			command = "/" + command;
+
+		return createMessage(message, ClickEvent.Action.RUN_COMMAND, command, "§a§lClick here §eto run §c" + command);
+
+	}
+
+	public static TextComponent createUrlTextComponent(String message, String url) {
+		return createMessage(message, ClickEvent.Action.OPEN_URL, url, "§a§lClick here §eto open URL §c" + url);
 	}
 
 }
