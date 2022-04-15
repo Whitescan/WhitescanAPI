@@ -4,7 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ClickEvent.Action;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -179,7 +178,7 @@ public class MessageService {
 		return createErrorMessage("This input only accepts decimal numbers!");
 	}
 
-	public static BaseComponent createInvalidIntegerInputMessage() {
+	public static TextComponent createInvalidIntegerInputMessage() {
 		return createErrorMessage("This input only accepts integers!");
 	}
 
