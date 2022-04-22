@@ -29,6 +29,15 @@ import dev.dbassett.skullcreator.SkullCreator;
  */
 public class BukkitUtils {
 
+	/**
+	 * 
+	 * @author Whitescan
+	 *
+	 */
+	public enum SkinMethod {
+		URL, BASE64, UUID;
+	}
+
 	public static ItemStack createItem(String displayName, Material material, int amount, List<String> lores) {
 		ItemStack itemStack = new ItemStack(material, amount);
 		ItemMeta itemMeta = itemStack.getItemMeta();
@@ -74,41 +83,47 @@ public class BukkitUtils {
 		return itemStack;
 	}
 
-	public static ItemStack createHeadFromUniqueId(UUID uniqueId, String displayName, List<String> lores) {
-		ItemStack itemStack = SkullCreator.itemFromUuid(uniqueId);
+	public static ItemStack createHead(SkinMethod method, String value) {
+
+		final ItemStack itemStack;
+
+		switch (method) {
+
+		case BASE64:
+			itemStack = SkullCreator.itemFromBase64(value);
+			break;
+
+		case URL:
+			itemStack = SkullCreator.itemFromUrl(value);
+			break;
+
+		case UUID:
+			itemStack = SkullCreator.itemFromUuid(UUID.fromString(value));
+			break;
+
+		default:
+			itemStack = new ItemStack(Material.PLAYER_HEAD);
+			break;
+		}
+
+		SkullMeta itemMeta = (SkullMeta) itemStack.getItemMeta();
+		itemStack.setItemMeta(itemMeta);
+		return itemStack;
+
+	}
+
+	public static ItemStack createHead(SkinMethod method, String value, String displayName) {
+		ItemStack itemStack = createHead(method, value);
 		SkullMeta itemMeta = (SkullMeta) itemStack.getItemMeta();
 		itemMeta.setDisplayName(displayName);
+		itemStack.setItemMeta(itemMeta);
+		return itemStack;
+	}
+
+	public static ItemStack createHead(SkinMethod method, String value, String displayName, List<String> lores) {
+		ItemStack itemStack = createHead(method, value, displayName);
+		SkullMeta itemMeta = (SkullMeta) itemStack.getItemMeta();
 		itemMeta.setLore(lores);
-		itemStack.setItemMeta(itemMeta);
-		return itemStack;
-	}
-
-	public static ItemStack createHeadFromUniqueId(UUID uniqueId, String displayName) {
-		ItemStack itemStack = SkullCreator.itemFromUuid(uniqueId);
-		SkullMeta itemMeta = (SkullMeta) itemStack.getItemMeta();
-		itemMeta.setDisplayName(displayName);
-		itemStack.setItemMeta(itemMeta);
-		return itemStack;
-	}
-
-	public static ItemStack createHeadFromBase64(String value) {
-		ItemStack itemStack = SkullCreator.itemFromBase64(value);
-		SkullMeta itemMeta = (SkullMeta) itemStack.getItemMeta();
-		itemStack.setItemMeta(itemMeta);
-		return itemStack;
-	}
-
-	public static ItemStack createHeadFromBase64(String value, String displayName) {
-		ItemStack itemStack = SkullCreator.itemFromBase64(value);
-		SkullMeta itemMeta = (SkullMeta) itemStack.getItemMeta();
-		itemMeta.setDisplayName(displayName);
-		itemStack.setItemMeta(itemMeta);
-		return itemStack;
-	}
-
-	public static ItemStack createHeadFromUrl(String url) {
-		ItemStack itemStack = SkullCreator.itemFromUrl(url);
-		SkullMeta itemMeta = (SkullMeta) itemStack.getItemMeta();
 		itemStack.setItemMeta(itemMeta);
 		return itemStack;
 	}
