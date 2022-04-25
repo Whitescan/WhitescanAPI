@@ -19,12 +19,14 @@ public abstract class BungeeCommand extends Command implements TabExecutor {
 	@Getter
 	private TextComponent noPermissionMessage;
 
-	public BungeeCommand(String name, String permission, String[] aliases) {
+	public BungeeCommand(String name, String permission, TextComponent noPermissionMessage, String[] aliases) {
 		super(name, permission, aliases);
+		this.noPermissionMessage = noPermissionMessage;
 	}
 
-	public BungeeCommand(String name, String permission) {
+	public BungeeCommand(String name, String permission, TextComponent noPermissionMessage) {
 		super(name, permission, new String[] {});
+		this.noPermissionMessage = noPermissionMessage;
 	}
 
 	@Override
