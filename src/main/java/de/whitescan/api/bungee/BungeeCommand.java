@@ -9,7 +9,7 @@ import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.TabExecutor;
 
 /**
- * 
+ *
  * @author Whitescan
  *
  */
@@ -44,7 +44,7 @@ public abstract class BungeeCommand extends Command implements TabExecutor {
 			return tabComplete(actor, args);
 		}
 
-		return new ArrayList<String>();
+		return new ArrayList<>();
 
 	}
 

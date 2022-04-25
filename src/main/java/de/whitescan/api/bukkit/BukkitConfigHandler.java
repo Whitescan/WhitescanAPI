@@ -30,6 +30,7 @@ public abstract class BukkitConfigHandler extends AbstractConfigHandler {
 		this.plugin = plugin;
 		this.logger = plugin.getLogger();
 		load();
+		read();
 	}
 
 	@Override

@@ -23,14 +23,14 @@ import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 import dev.dbassett.skullcreator.SkullCreator;
 
 /**
- * 
+ *
  * @author Whitescan
  *
  */
 public class BukkitUtils {
 
 	/**
-	 * 
+	 *
 	 * @author Whitescan
 	 *
 	 */

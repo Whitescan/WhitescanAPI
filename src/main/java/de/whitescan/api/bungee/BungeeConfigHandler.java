@@ -30,6 +30,7 @@ public abstract class BungeeConfigHandler extends AbstractConfigHandler {
 		this.plugin = plugin;
 		this.logger = plugin.getLogger();
 		load();
+		read();
 	}
 
 	@Override
@@ -42,8 +43,8 @@ public abstract class BungeeConfigHandler extends AbstractConfigHandler {
 		}
 
 		if (!configFile.exists()) {
-			logger.warning(
-					"Config file " + configFile.getAbsolutePath() + " does not exist, creating default... This can be ignored if you are setting this up.");
+			logger.warning("Config file " + configFile.getAbsolutePath()
+					+ " does not exist, creating default... This can be ignored if you are setting this up.");
 			try {
 				InputStream in = plugin.getResourceAsStream(configFile.getName());
 				Files.copy(in, configFile.toPath());
