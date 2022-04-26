@@ -21,12 +21,20 @@ public abstract class BukkitConfigHandler extends AbstractConfigHandler {
 
 	protected Plugin plugin;
 
-	protected YamlConfiguration config;
-
 	protected Logger logger;
 
+	protected YamlConfiguration config;
+
 	public BukkitConfigHandler(Plugin plugin, File configFile) {
-		super(configFile);
+		super(configFile, configFile);
+		this.plugin = plugin;
+		this.logger = plugin.getLogger();
+		load();
+		read();
+	}
+
+	public BukkitConfigHandler(Plugin plugin, File resourceFile, File configFile) {
+		super(resourceFile, configFile);
 		this.plugin = plugin;
 		this.logger = plugin.getLogger();
 		load();
@@ -43,10 +51,10 @@ public abstract class BukkitConfigHandler extends AbstractConfigHandler {
 		}
 
 		if (!configFile.exists()) {
-			logger.warning(
-					"Config file " + configFile.getAbsolutePath() + " does not exist, creating default... This can be ignored if you are setting this up.");
+			logger.warning("Config file " + configFile.getAbsolutePath()
+					+ " does not exist, creating default... This can be ignored if you are setting this up.");
 			try {
-				InputStream in = plugin.getResource(configFile.getName());
+				InputStream in = plugin.getResource(resourceFile.getName());
 				Files.copy(in, configFile.toPath());
 			} catch (IOException e) {
 				logger.warning("Failed to copy default file " + configFile.getAbsolutePath()

@@ -26,7 +26,15 @@ public abstract class BungeeConfigHandler extends AbstractConfigHandler {
 	protected Configuration config;
 
 	public BungeeConfigHandler(Plugin plugin, File configFile) {
-		super(configFile);
+		super(configFile, configFile);
+		this.plugin = plugin;
+		this.logger = plugin.getLogger();
+		load();
+		read();
+	}
+
+	public BungeeConfigHandler(Plugin plugin, File resourceFile, File configFile) {
+		super(resourceFile, configFile);
 		this.plugin = plugin;
 		this.logger = plugin.getLogger();
 		load();
@@ -46,7 +54,7 @@ public abstract class BungeeConfigHandler extends AbstractConfigHandler {
 			logger.warning("Config file " + configFile.getAbsolutePath()
 					+ " does not exist, creating default... This can be ignored if you are setting this up.");
 			try {
-				InputStream in = plugin.getResourceAsStream(configFile.getName());
+				InputStream in = plugin.getResourceAsStream(resourceFile.getName());
 				Files.copy(in, configFile.toPath());
 			} catch (IOException e) {
 				logger.warning("Failed to copy default file " + configFile.getAbsolutePath()

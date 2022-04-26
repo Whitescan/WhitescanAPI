@@ -12,6 +12,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public abstract class AbstractConfigHandler {
 
+	protected final File resourceFile;
+	
 	protected final File configFile;
 
 	protected abstract void load();
