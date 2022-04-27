@@ -24,13 +24,14 @@ import org.bukkit.plugin.Plugin;
 import de.whitescan.api.utils.ChatUtils;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 
 /**
  * 
  * @author Whitescan
  *
  */
-public class BukkitGUI implements Listener {
+public abstract class BukkitMultiPageGUI implements Listener {
 
 	// Settings
 
@@ -41,37 +42,42 @@ public class BukkitGUI implements Listener {
 	private List<Inventory> pages = new ArrayList<>();
 
 	@Getter
+	@Setter
 	private Map<Integer, ItemStack> navbar = new HashMap<>();
-
-	@Getter
-	private InventoryActionHandler handler;
 
 	// Runtime
 
 	@Getter
 	private Map<Player, Inventory> open = new HashMap<>();
 
-	public BukkitGUI(@NonNull Plugin plugin, @NonNull String title, InventoryActionHandler handler, List<ItemStack> items) {
+	public BukkitMultiPageGUI(@NonNull Plugin plugin, @NonNull String title, @NonNull List<ItemStack> items) {
 		this.title = ChatUtils.translateHexCodes(title, true);
-		this.handler = handler;
 		Bukkit.getPluginManager().registerEvents(this, plugin);
-		calculatePages(items);
 	}
 
-	private void calculatePages(List<ItemStack> items) {
+	public BukkitMultiPageGUI(@NonNull Plugin plugin, @NonNull String title, @NonNull List<ItemStack> items,
+			@NonNull Map<Integer, ItemStack> navbar) {
+		this.title = ChatUtils.translateHexCodes(title, true);
+		this.navbar = navbar;
+		Bukkit.getPluginManager().registerEvents(this, plugin);
+	}
+
+	protected void calculatePages(List<ItemStack> items) {
 
 		Inventory page = getBlankPage();
 
-		for (int item = 0; item < items.size(); item++) {
+		int slot = 0;
 
-			if (page.firstEmpty() == 46) {
+		for (ItemStack item : items) {
+
+			if (slot == 45) {
 				getPages().add(page);
 				page = getBlankPage();
-				page.addItem(items.get(item));
+				slot = 0;
 
-			} else {
-				page.addItem(items.get(item));
 			}
+
+			page.setItem(slot++, item);
 
 		}
 
@@ -106,9 +112,14 @@ public class BukkitGUI implements Listener {
 		Inventory inventory = getOpen().get(player);
 
 		int counter = 0;
+
 		for (Inventory page : getPages()) {
+
 			if (page.equals(inventory))
 				break;
+
+			counter++;
+
 		}
 
 		return counter;
@@ -140,18 +151,43 @@ public class BukkitGUI implements Listener {
 	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = false)
 	public void onInventoryInteract(InventoryInteractEvent e) {
 		if (e.getWhoClicked() instanceof Player actor && e.getView().getTitle().startsWith(getTitle()))
-			getHandler().onInteract(e);
+			onInteract(e);
 	}
 
 	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = false)
 	public void onInventoryClick(InventoryClickEvent e) {
 		if (e.getWhoClicked() instanceof Player actor && e.getView().getTitle().startsWith(getTitle()))
-			getHandler().onClick(e);
+			onClick(e);
 	}
 
 	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = false)
 	public void onInventoryDrag(InventoryDragEvent e) {
 		if (e.getWhoClicked() instanceof Player actor && e.getView().getTitle().startsWith(getTitle()))
-			getHandler().onDrag(e);
+			onDrag(e);
 	}
+
+	/**
+	 * This is the root for {@link #onClick(InventoryClickEvent)} and {@link #onDrag(InventoryDragEvent)}
+	 * 
+	 * @param e
+	 */
+	public abstract void onInteract(InventoryInteractEvent e);
+
+	/**
+	 * This is being called when the inventory has been clicked.
+	 * 
+	 * See also {@link #onDrag(InventoryDragEvent)}
+	 * 
+	 * @param e
+	 */
+	public abstract void onClick(InventoryClickEvent e);
+
+	/**
+	 * This is being called when when someone attempts to drag items from or to this inventory.
+	 * 
+	 * See also {@link #onClick(InventoryClickEvent)}
+	 * 
+	 * @param e
+	 */
+	public abstract void onDrag(InventoryDragEvent e);
 }
