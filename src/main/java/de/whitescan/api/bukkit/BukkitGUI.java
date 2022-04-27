@@ -21,6 +21,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
+import de.whitescan.api.utils.ChatUtils;
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -51,7 +52,7 @@ public class BukkitGUI implements Listener {
 	private Map<Player, Inventory> open = new HashMap<>();
 
 	public BukkitGUI(@NonNull Plugin plugin, @NonNull String title, InventoryActionHandler handler, List<ItemStack> items) {
-		this.title = title;
+		this.title = ChatUtils.translateHexCodes(title, true);
 		this.handler = handler;
 		Bukkit.getPluginManager().registerEvents(this, plugin);
 		calculatePages(items);
