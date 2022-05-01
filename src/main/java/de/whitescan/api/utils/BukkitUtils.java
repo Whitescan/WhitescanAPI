@@ -128,6 +128,12 @@ public class BukkitUtils {
 		return itemStack;
 	}
 
+	public static ItemStack createHead(SkinMethod method, String value, String displayName, int amount, List<String> lores) {
+		ItemStack itemStack = createHead(method, value, displayName, lores);
+		itemStack.setAmount(amount);
+		return itemStack;
+	}
+
 	/**
 	 * Converts the player inventory to a String array of Base64 strings. First string is the content and second string is
 	 * the armor.
