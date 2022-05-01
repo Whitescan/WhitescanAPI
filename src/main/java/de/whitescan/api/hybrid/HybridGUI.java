@@ -39,13 +39,8 @@ public class HybridGUI {
 	}
 
 	public void close(Player player) {
-		if (FLOODGATE_API.isFloodgatePlayer(player.getUniqueId())) {
-//			if (bedrockGUI.getOpen().contains(player))
-			// TODO Close Bedrock GUI?
-		} else {
-			if (bukkitGUI.getOpen().containsKey(player))
-				player.closeInventory();
-		}
+		if (bukkitGUI.getOpen().containsKey(player))
+			player.closeInventory();
 	}
 
 	public void closeAll() {
