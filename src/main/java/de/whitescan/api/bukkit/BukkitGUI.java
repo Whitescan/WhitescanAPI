@@ -61,8 +61,10 @@ public abstract class BukkitGUI implements Listener {
 
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onInventoryClose(InventoryCloseEvent e) {
-		if (e.getPlayer() instanceof Player actor && e.getView().getTitle().startsWith(getTitle()))
+		if (e.getPlayer() instanceof Player actor && e.getView().getTitle().startsWith(getTitle())) {
 			getOpen().remove(actor);
+			onClose(e);
+		}
 	}
 
 	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = false)
@@ -84,6 +86,10 @@ public abstract class BukkitGUI implements Listener {
 	}
 	
 	public abstract void open(Player player);
+	
+	public void onClose(InventoryCloseEvent e) {
+		
+	}
 
 	/**
 	 * This is the root for {@link #onClick(InventoryClickEvent)} and {@link #onDrag(InventoryDragEvent)}
