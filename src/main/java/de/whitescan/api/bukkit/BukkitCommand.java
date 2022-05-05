@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
-import de.whitescan.api.share.MessageService;
+import de.whitescan.api.share.AncientMessageService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -31,7 +31,7 @@ public abstract class BukkitCommand implements CommandExecutor, TabExecutor {
 			executeCommand(sender, label, args);
 
 		} else {
-			sender.spigot().sendMessage(MessageService.NO_PERMISSION);
+			sender.spigot().sendMessage(AncientMessageService.NO_PERMISSION);
 		}
 
 		return true;

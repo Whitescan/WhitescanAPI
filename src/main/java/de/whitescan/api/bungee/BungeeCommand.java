@@ -2,7 +2,7 @@ package de.whitescan.api.bungee;
 
 import java.util.ArrayList;
 
-import de.whitescan.api.share.MessageService;
+import de.whitescan.api.share.AncientMessageService;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
@@ -30,7 +30,7 @@ public abstract class BungeeCommand extends Command implements TabExecutor {
 			executeCommand(sender, args);
 
 		} else {
-			sender.sendMessage(MessageService.NO_PERMISSION);
+			sender.sendMessage(AncientMessageService.NO_PERMISSION);
 		}
 
 	}

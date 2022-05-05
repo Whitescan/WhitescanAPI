@@ -15,7 +15,7 @@ import net.md_5.bungee.api.chat.hover.content.Text;
  * @author Whitescan
  *
  */
-public class MessageService {
+public class AncientMessageService {
 
 	/**
 	 * Pattern for HEX codes
@@ -30,17 +30,17 @@ public class MessageService {
 	/**
 	 * Root Prefix
 	 */
-	private static final String PROXY_PREFIX = RAW_PREFIX + " §f§l» §e";
+	public static final String PROXY_PREFIX = RAW_PREFIX + " §f§l» §e";
 
 	/**
 	 * Prefix for errors
 	 */
-	private static final String ERROR_PREFIX = PROXY_PREFIX + "§4Error! §c";
+	public static final String ERROR_PREFIX = PROXY_PREFIX + "§4Error! §c";
 
 	/**
 	 * Prefix for warnings
 	 */
-	private static final String WARNING_PREFIX = PROXY_PREFIX + "§4Warning! §c";
+	public static final String WARNING_PREFIX = PROXY_PREFIX + "§4Warning! §c";
 
 	/**
 	 * Message used when actor is laking the permission to access a command section
@@ -150,14 +150,16 @@ public class MessageService {
 	 * Message used when an input string contains invalid characters
 	 */
 	public static TextComponent createInvalidStringInputMessage(int size) {
-		return createErrorMessage("This input only accepts characters of the english keyboard-layout and a maximum of " + size + " characters!");
+		return createErrorMessage(
+				"This input only accepts characters of the english keyboard-layout and a maximum of " + size + " characters!");
 	}
 
 	/**
 	 * Message used when an input key contains invalid characters
 	 */
 	public static TextComponent createInvalidKeyInputMessage(int size) {
-		return createErrorMessage("This input only accepts non-special characters of the english keyboard-layout and a maximum of " + size + " characters!");
+		return createErrorMessage(
+				"This input only accepts non-special characters of the english keyboard-layout and a maximum of " + size + " characters!");
 	}
 
 	/**
