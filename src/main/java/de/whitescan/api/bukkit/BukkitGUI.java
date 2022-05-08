@@ -1,6 +1,8 @@
 package de.whitescan.api.bukkit;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
@@ -15,6 +17,7 @@ import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 import de.whitescan.api.utils.ChatUtils;
@@ -37,6 +40,29 @@ public abstract class BukkitGUI implements Listener {
 
 	@Getter
 	private Map<Player, Inventory> open = new HashMap<>();
+
+	public static List<ItemStack> getFormattedItemList(@NonNull Map<Integer, ItemStack> map, ItemStack fill) {
+
+		List<ItemStack> items = new ArrayList<>();
+
+		int highest = 0;
+		for (int key : map.keySet())
+			highest = key > highest ? key : highest;
+
+		for (int pos = 0; pos <= highest; pos++) {
+
+			ItemStack itemStack = map.get(pos);
+
+			if (itemStack == null)
+				itemStack = fill;
+
+			items.add(itemStack);
+
+		}
+
+		return items;
+
+	}
 
 	public BukkitGUI(@NonNull Plugin plugin, @NonNull String title) {
 		this.title = ChatUtils.translateHexCodes(title, true);
@@ -84,11 +110,11 @@ public abstract class BukkitGUI implements Listener {
 		if (e.getWhoClicked() instanceof Player actor && e.getView().getTitle().startsWith(getTitle()))
 			onDrag(e);
 	}
-	
+
 	public abstract void open(Player player);
-	
+
 	public void onClose(InventoryCloseEvent e) {
-		
+
 	}
 
 	/**
