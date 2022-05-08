@@ -36,39 +36,20 @@ public abstract class BukkitGUI implements Listener {
 	@Getter
 	private String title;
 
+	@Getter
+	private List<ItemStack> items;
+
 	// Runtime
 
 	@Getter
 	private Map<Player, Inventory> open = new HashMap<>();
 
-	public static List<ItemStack> getFormattedItemList(@NonNull Map<Integer, ItemStack> map, ItemStack fill) {
-
-		List<ItemStack> items = new ArrayList<>();
-
-		int highest = 0;
-		for (int key : map.keySet())
-			highest = key > highest ? key : highest;
-
-		for (int pos = 0; pos <= highest; pos++) {
-
-			ItemStack itemStack = map.get(pos);
-
-			if (itemStack == null)
-				itemStack = fill;
-
-			items.add(itemStack);
-
-		}
-
-		return items;
-
-	}
-
-	public BukkitGUI(@NonNull Plugin plugin, @NonNull String title) {
+	public BukkitGUI(@NonNull Plugin plugin, @NonNull String title, @NonNull List<ItemStack> items) {
 		this.title = ChatUtils.translateHexCodes(title, true);
+		this.items = items;
 		Bukkit.getPluginManager().registerEvents(this, plugin);
 	}
-
+	
 	public void closeAll() {
 		for (Player p : getOpen().keySet())
 			p.closeInventory();
@@ -112,6 +93,8 @@ public abstract class BukkitGUI implements Listener {
 	}
 
 	public abstract void open(Player player);
+	
+	public abstract void populate();
 
 	public void onClose(InventoryCloseEvent e) {
 
@@ -141,5 +124,28 @@ public abstract class BukkitGUI implements Listener {
 	 * @param e
 	 */
 	public abstract void onDrag(InventoryDragEvent e);
+
+	public static List<ItemStack> getFormattedItemList(@NonNull Map<Integer, ItemStack> map, ItemStack fill) {
+	
+		List<ItemStack> items = new ArrayList<>();
+	
+		int highest = 0;
+		for (int key : map.keySet())
+			highest = key > highest ? key : highest;
+	
+		for (int pos = 0; pos <= highest; pos++) {
+	
+			ItemStack itemStack = map.get(pos);
+	
+			if (itemStack == null)
+				itemStack = fill;
+	
+			items.add(itemStack);
+	
+		}
+	
+		return items;
+	
+	}
 
 }

@@ -27,7 +27,7 @@ public class SimpleBukkitMultiPageGUI extends BukkitMultiPageGUI {
 	private ItemStack nextPage;
 
 	public SimpleBukkitMultiPageGUI(@NonNull Plugin plugin, @NonNull String title, @NonNull List<ItemStack> items) {
-		super(plugin, title);
+		super(plugin, title, items);
 		this.nextPage = BukkitUtils.createHead(SkinMethod.BASE64,
 				"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGFhMTg3ZmVkZTg4ZGUwMDJjYmQ5MzA1NzVlYjdiYTQ4ZDNiMWEwNmQ5NjFiZGM1MzU4MDA3NTBhZjc2NDkyNiJ9fX0=",
 				"§6§lNext Page");
@@ -40,13 +40,13 @@ public class SimpleBukkitMultiPageGUI extends BukkitMultiPageGUI {
 		navbar.put(53, nextPage);
 		setNavbar(navbar);
 
-		calculatePages(items);
+		populate();
 
 	}
 
 	public SimpleBukkitMultiPageGUI(@NonNull Plugin plugin, @NonNull String title, @NonNull List<ItemStack> items,
 			@NonNull ItemStack nextPage, @NonNull ItemStack previousPage) {
-		super(plugin, title);
+		super(plugin, title, items);
 		this.nextPage = nextPage;
 		this.previousPage = previousPage;
 
@@ -55,13 +55,8 @@ public class SimpleBukkitMultiPageGUI extends BukkitMultiPageGUI {
 		navbar.put(53, nextPage);
 		setNavbar(navbar);
 
-		calculatePages(items);
+		populate();
 
-	}
-
-	@Override
-	public void open(Player player) {
-		openPage(player, 0);
 	}
 
 	@Override

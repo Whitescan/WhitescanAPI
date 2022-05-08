@@ -1,8 +1,11 @@
 package de.whitescan.api.bukkit;
 
+import java.util.List;
+
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 import lombok.NonNull;
@@ -14,8 +17,8 @@ import lombok.NonNull;
  */
 public class SimpleBukkitSinglePageGUI extends BukkitSinglePageGUI {
 
-	public SimpleBukkitSinglePageGUI(@NonNull Plugin plugin, @NonNull String title) {
-		super(plugin, title);
+	public SimpleBukkitSinglePageGUI(@NonNull Plugin plugin, @NonNull String title, @NonNull List<ItemStack> items) {
+		super(plugin, title, items);
 	}
 
 	@Override

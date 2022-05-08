@@ -33,17 +33,20 @@ public abstract class BukkitMultiPageGUI extends BukkitGUI implements Listener {
 	@Setter
 	private Map<Integer, ItemStack> navbar = new HashMap<>();
 
-	public BukkitMultiPageGUI(@NonNull Plugin plugin, @NonNull String title) {
-		super(plugin, title);
+	public BukkitMultiPageGUI(@NonNull Plugin plugin, @NonNull String title, @NonNull List<ItemStack> items) {
+		super(plugin, title, items);
 	}
 
-	protected void calculatePages(List<ItemStack> items) {
+	@Override
+	public void populate() {
+		
+		getPages().clear();
 
 		Inventory page = getBlankPage();
 
 		int slot = 0;
 
-		for (ItemStack item : items) {
+		for (ItemStack item : getItems()) {
 
 			if (slot == 45) {
 				getPages().add(page);
@@ -99,6 +102,11 @@ public abstract class BukkitMultiPageGUI extends BukkitGUI implements Listener {
 
 		return counter;
 
+	}
+	
+	@Override
+	public void open(Player player) {
+		openPage(player, 0);
 	}
 
 }

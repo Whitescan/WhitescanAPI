@@ -21,17 +21,18 @@ public abstract class BukkitSinglePageGUI extends BukkitGUI {
 	@Getter
 	private Inventory page;
 
-	public BukkitSinglePageGUI(@NonNull Plugin plugin, @NonNull String title) {
-		super(plugin, title);
+	public BukkitSinglePageGUI(@NonNull Plugin plugin, @NonNull String title, @NonNull List<ItemStack> items) {
+		super(plugin, title, items);
 	}
 
-	protected void calculatePage(List<ItemStack> items) {
+	@Override
+	public void populate() {
 
 		Inventory page = Bukkit.createInventory(null, 54, getTitle());
 
 		int slot = 0;
 
-		for (ItemStack item : items) {
+		for (ItemStack item : getItems()) {
 			page.setItem(slot++, item);
 		}
 
