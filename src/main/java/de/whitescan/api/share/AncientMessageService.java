@@ -23,26 +23,6 @@ public class AncientMessageService {
 	private static final Pattern HEX_PATTERN = Pattern.compile("#[a-fA-F0-9]{6}");
 
 	/**
-	 * The networks name
-	 */
-	public static final String RAW_PREFIX = "§4§lE§8§ln§4§ld§8§lu§4§lr§8§li§4§lo§8§ln";
-
-	/**
-	 * Root Prefix
-	 */
-	public static final String PROXY_PREFIX = RAW_PREFIX + " §f§l» §e";
-
-	/**
-	 * Prefix for errors
-	 */
-	public static final String ERROR_PREFIX = PROXY_PREFIX + "§4Error! §c";
-
-	/**
-	 * Prefix for warnings
-	 */
-	public static final String WARNING_PREFIX = PROXY_PREFIX + "§4Warning! §c";
-
-	/**
 	 * Message used when actor is laking the permission to access a command section
 	 */
 	public static final TextComponent NO_PERMISSION = createErrorMessage("You are not allowed to do that...");
@@ -58,9 +38,11 @@ public class AncientMessageService {
 	public static final TextComponent TARGET_NOT_FOUND = createErrorMessage("This player is unkown to this server...");
 
 	/**
-	 * Message used when the target player exists, but is not available to the sender
+	 * Message used when the target player exists, but is not available to the
+	 * sender
 	 */
-	public static final TextComponent TARGET_NOT_AVAILABLE = createErrorMessage("This player is currently unavailable...");
+	public static final TextComponent TARGET_NOT_AVAILABLE = createErrorMessage(
+			"This player is currently unavailable...");
 
 	/**
 	 * Message used when target is the actor
@@ -82,11 +64,12 @@ public class AncientMessageService {
 	 * @return <TextComponent>
 	 */
 	public static TextComponent createMessage(String message) {
-		TextComponent textComponent = new TextComponent(PROXY_PREFIX + message);
+		TextComponent textComponent = new TextComponent("§e" + message);
 		return textComponent;
 	}
 
-	public static TextComponent createMessage(String message, ClickEvent.Action action, String clickText, String hoverText) {
+	public static TextComponent createMessage(String message, ClickEvent.Action action, String clickText,
+			String hoverText) {
 		TextComponent textComponent = new TextComponent(message);
 		textComponent.setClickEvent(new ClickEvent(action, clickText));
 		textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(hoverText)));
@@ -100,7 +83,7 @@ public class AncientMessageService {
 	 * @return <TextComponent>
 	 */
 	public static TextComponent createErrorMessage(String message) {
-		TextComponent textComponent = new TextComponent(ERROR_PREFIX + message);
+		TextComponent textComponent = new TextComponent("§c" + message);
 		return textComponent;
 	}
 
@@ -111,7 +94,7 @@ public class AncientMessageService {
 	 * @return <TextComponent>
 	 */
 	public static TextComponent createWarningMessage(String message) {
-		TextComponent textComponent = new TextComponent(WARNING_PREFIX + message);
+		TextComponent textComponent = new TextComponent("§c" + message);
 		return textComponent;
 	}
 
@@ -150,8 +133,8 @@ public class AncientMessageService {
 	 * Message used when an input string contains invalid characters
 	 */
 	public static TextComponent createInvalidStringInputMessage(int size) {
-		return createErrorMessage(
-				"This input only accepts characters of the english keyboard-layout and a maximum of " + size + " characters!");
+		return createErrorMessage("This input only accepts characters of the english keyboard-layout and a maximum of "
+				+ size + " characters!");
 	}
 
 	/**
@@ -159,7 +142,8 @@ public class AncientMessageService {
 	 */
 	public static TextComponent createInvalidKeyInputMessage(int size) {
 		return createErrorMessage(
-				"This input only accepts non-special characters of the english keyboard-layout and a maximum of " + size + " characters!");
+				"This input only accepts non-special characters of the english keyboard-layout and a maximum of " + size
+						+ " characters!");
 	}
 
 	/**
