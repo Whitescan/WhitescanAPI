@@ -20,6 +20,13 @@ public class ChatUtils {
 	 */
 	private static final Pattern HEX_PATTERN = Pattern.compile("#[a-fA-F0-9]{6}");
 
+	private static final Pattern DOMAIN_PATTERN = Pattern
+			.compile("^((?!-)[A-Za-z0-9-]" + "{1,63}(?<!-)\\.)" + "+[A-Za-z]{2,6}");
+
+	private static final Pattern IP_PATTERN = Pattern.compile("(?<!\\d|\\d\\.)"
+			+ "(?:[01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "(?:[01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
+			+ "(?:[01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "(?:[01]?\\d\\d?|2[0-4]\\d|25[0-5])" + "(?!\\d|\\.\\d)");
+
 	/**
 	 * Translate HEX codes in chat components.
 	 *
@@ -122,6 +129,42 @@ public class ChatUtils {
 		}
 
 		return found;
+
+	}
+
+	public static boolean containsDomain(String input) {
+
+		if (input == null || input.isBlank())
+			return false;
+
+		for (String s : input.split(" ")) {
+
+			Matcher matcher = DOMAIN_PATTERN.matcher(s);
+
+			if (matcher.matches())
+				return true;
+
+		}
+
+		return false;
+
+	}
+
+	public static boolean containsIP(String input) {
+		
+		if (input == null || input.isBlank())
+			return false;
+
+		for (String s : input.split(" ")) {
+
+			Matcher matcher = IP_PATTERN.matcher(s);
+
+			if (matcher.matches())
+				return true;
+
+		}
+
+		return false;
 
 	}
 
