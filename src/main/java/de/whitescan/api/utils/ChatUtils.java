@@ -68,7 +68,7 @@ public class ChatUtils {
 
 	}
 
-	public static List<String> findBadwords(String input, Map<String, String[]> badwords) {
+	public static List<String> findCurseWords(String input, Map<String, String[]> badwords) {
 
 		if (input == null)
 			return new ArrayList<>();
