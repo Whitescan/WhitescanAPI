@@ -18,7 +18,7 @@ import lombok.NonNull;
 import lombok.Setter;
 
 /**
- * 
+ *
  * @author Whitescan
  *
  */
@@ -39,7 +39,7 @@ public abstract class BukkitMultiPageGUI extends BukkitGUI implements Listener {
 
 	@Override
 	public void populate() {
-		
+
 		getPages().clear();
 
 		Inventory page = getBlankPage();
@@ -65,7 +65,7 @@ public abstract class BukkitMultiPageGUI extends BukkitGUI implements Listener {
 
 	/**
 	 * Create a blank page only containing the navigation bar
-	 * 
+	 *
 	 * @return
 	 */
 	private Inventory getBlankPage() {
@@ -103,7 +103,7 @@ public abstract class BukkitMultiPageGUI extends BukkitGUI implements Listener {
 		return counter;
 
 	}
-	
+
 	@Override
 	public void open(Player player) {
 		openPage(player, 0);

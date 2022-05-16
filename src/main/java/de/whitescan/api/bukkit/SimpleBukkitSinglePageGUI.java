@@ -11,7 +11,7 @@ import org.bukkit.plugin.Plugin;
 import lombok.NonNull;
 
 /**
- * 
+ *
  * @author Whitescan
  *
  */

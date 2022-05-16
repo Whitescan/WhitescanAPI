@@ -8,7 +8,7 @@ import org.geysermc.floodgate.api.player.FloodgatePlayer;
 import lombok.NonNull;
 
 /**
- * 
+ *
  * @author Whitescan
  *
  */

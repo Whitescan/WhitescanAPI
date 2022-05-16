@@ -25,7 +25,7 @@ import lombok.Getter;
 import lombok.NonNull;
 
 /**
- * 
+ *
  * @author Whitescan
  *
  */
@@ -49,7 +49,7 @@ public abstract class BukkitGUI implements Listener {
 		this.items = items;
 		Bukkit.getPluginManager().registerEvents(this, plugin);
 	}
-	
+
 	public void closeAll() {
 		for (Player p : getOpen().keySet())
 			p.closeInventory();
@@ -93,7 +93,7 @@ public abstract class BukkitGUI implements Listener {
 	}
 
 	public abstract void open(Player player);
-	
+
 	public abstract void populate();
 
 	public void onClose(InventoryCloseEvent e) {
@@ -102,50 +102,50 @@ public abstract class BukkitGUI implements Listener {
 
 	/**
 	 * This is the root for {@link #onClick(InventoryClickEvent)} and {@link #onDrag(InventoryDragEvent)}
-	 * 
+	 *
 	 * @param e
 	 */
 	public abstract void onInteract(InventoryInteractEvent e);
 
 	/**
 	 * This is being called when the inventory has been clicked.
-	 * 
+	 *
 	 * See also {@link #onDrag(InventoryDragEvent)}
-	 * 
+	 *
 	 * @param e
 	 */
 	public abstract void onClick(InventoryClickEvent e);
 
 	/**
 	 * This is being called when when someone attempts to drag items from or to this inventory.
-	 * 
+	 *
 	 * See also {@link #onClick(InventoryClickEvent)}
-	 * 
+	 *
 	 * @param e
 	 */
 	public abstract void onDrag(InventoryDragEvent e);
 
 	public static List<ItemStack> getFormattedItemList(@NonNull Map<Integer, ItemStack> map, ItemStack fill) {
-	
+
 		List<ItemStack> items = new ArrayList<>();
-	
+
 		int highest = 0;
 		for (int key : map.keySet())
 			highest = key > highest ? key : highest;
-	
+
 		for (int pos = 0; pos <= highest; pos++) {
-	
+
 			ItemStack itemStack = map.get(pos);
-	
+
 			if (itemStack == null)
 				itemStack = fill;
-	
+
 			items.add(itemStack);
-	
+
 		}
-	
+
 		return items;
-	
+
 	}
 
 }

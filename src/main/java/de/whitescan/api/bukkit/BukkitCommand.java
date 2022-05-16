@@ -9,9 +9,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
-import de.whitescan.api.share.AncientMessageService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import net.md_5.bungee.api.chat.TextComponent;
 
 /**
  *
@@ -22,7 +22,14 @@ import lombok.Getter;
 public abstract class BukkitCommand implements CommandExecutor, TabExecutor {
 
 	@Getter
-	private final String permission;
+	private String permission;
+
+	@Getter
+	private String permissionMessage;
+
+	protected boolean hasPermission(CommandSender sender) {
+		return getPermission() == null || sender.hasPermission(getPermission());
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -31,7 +38,7 @@ public abstract class BukkitCommand implements CommandExecutor, TabExecutor {
 			executeCommand(sender, label, args);
 
 		} else {
-			sender.spigot().sendMessage(AncientMessageService.NO_PERMISSION);
+			sender.spigot().sendMessage(new TextComponent(getPermissionMessage()));
 		}
 
 		return true;
@@ -52,9 +59,5 @@ public abstract class BukkitCommand implements CommandExecutor, TabExecutor {
 	}
 
 	protected abstract List<String> tabComplete(Player actor, String label, String[] args);
-
-	protected boolean hasPermission(CommandSender sender) {
-		return getPermission() == null || sender.hasPermission(getPermission());
-	}
 
 }
