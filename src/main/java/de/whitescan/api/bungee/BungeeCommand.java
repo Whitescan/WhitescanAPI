@@ -3,6 +3,7 @@ package de.whitescan.api.bungee;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -16,14 +17,19 @@ import net.md_5.bungee.api.plugin.TabExecutor;
  */
 public abstract class BungeeCommand extends Command implements TabExecutor {
 
-	public BungeeCommand(String name, String permission, String[] aliases, String permissionMessage) {
+	@Getter
+	private TextComponent noPermissionMessage;
+
+	public BungeeCommand(String name, String permission, String[] aliases, TextComponent noPermissionMessage) {
 		super(name, permission, aliases);
-		setPermissionMessage(permissionMessage);
+		this.noPermissionMessage = noPermissionMessage;
+		setPermissionMessage(noPermissionMessage.getText());
 	}
 
-	public BungeeCommand(String name, String permission, String noPermissionMessage) {
+	public BungeeCommand(String name, String permission, TextComponent noPermissionMessage) {
 		super(name, permission, new String[] {});
-		setPermissionMessage(noPermissionMessage);
+		this.noPermissionMessage = noPermissionMessage;
+		setPermissionMessage(noPermissionMessage.getText());
 	}
 
 	@Override
@@ -33,7 +39,7 @@ public abstract class BungeeCommand extends Command implements TabExecutor {
 			executeCommand(sender, args);
 
 		} else {
-			sender.sendMessage(new TextComponent(getPermissionMessage()));
+			sender.sendMessage(getNoPermissionMessage());
 		}
 
 	}

@@ -25,7 +25,7 @@ public abstract class BukkitCommand implements CommandExecutor, TabExecutor {
 	private String permission;
 
 	@Getter
-	private String permissionMessage;
+	private TextComponent noPermissionMessage;
 
 	protected boolean hasPermission(CommandSender sender) {
 		return getPermission() == null || sender.hasPermission(getPermission());
@@ -38,7 +38,7 @@ public abstract class BukkitCommand implements CommandExecutor, TabExecutor {
 			executeCommand(sender, label, args);
 
 		} else {
-			sender.spigot().sendMessage(new TextComponent(getPermissionMessage()));
+			sender.spigot().sendMessage(getNoPermissionMessage());
 		}
 
 		return true;
