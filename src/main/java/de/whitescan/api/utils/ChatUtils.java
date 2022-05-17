@@ -57,6 +57,10 @@ public class ChatUtils {
 		return createMessage(message, ClickEvent.Action.OPEN_URL, url, hoverText);
 	}
 
+	public static TextComponent createCopyMessage(String message, String hover, String copyText) {
+		return createMessage(message, ClickEvent.Action.COPY_TO_CLIPBOARD, copyText, hover);
+	}
+
 	/**
 	 * Translate HEX codes in chat components.
 	 *
