@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.logging.Logger;
 
-import de.whitescan.api.internal.AbstractConfigHandler;
+import de.whitescan.api.share.config.AbstractConfigHandler;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;

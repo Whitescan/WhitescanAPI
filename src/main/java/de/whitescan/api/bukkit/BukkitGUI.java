@@ -20,7 +20,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
-import de.whitescan.api.utils.ChatUtils;
+import de.whitescan.api.share.utils.ChatUtils;
 import lombok.Getter;
 import lombok.NonNull;
 

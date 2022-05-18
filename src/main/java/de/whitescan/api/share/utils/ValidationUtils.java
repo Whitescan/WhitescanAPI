@@ -1,4 +1,4 @@
-package de.whitescan.api.utils;
+package de.whitescan.api.share.utils;
 
 import org.apache.commons.lang3.StringUtils;
 

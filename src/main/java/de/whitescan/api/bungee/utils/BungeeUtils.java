@@ -1,4 +1,4 @@
-package de.whitescan.api.utils;
+package de.whitescan.api.bungee.utils;
 
 import java.util.ArrayList;
 import java.util.List;

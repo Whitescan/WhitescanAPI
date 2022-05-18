@@ -11,8 +11,8 @@ import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
-import de.whitescan.api.utils.BukkitUtils;
-import de.whitescan.api.utils.BukkitUtils.SkinMethod;
+import de.whitescan.api.bukkit.utils.BukkitUtils;
+import de.whitescan.api.bukkit.utils.BukkitUtils.SkinMethod;
 import lombok.NonNull;
 
 /**

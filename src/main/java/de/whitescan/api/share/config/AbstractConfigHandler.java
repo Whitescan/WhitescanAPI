@@ -1,4 +1,4 @@
-package de.whitescan.api.internal;
+package de.whitescan.api.share.config;
 
 import java.io.File;
 

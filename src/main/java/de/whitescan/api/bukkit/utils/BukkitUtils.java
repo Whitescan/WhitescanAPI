@@ -1,4 +1,4 @@
-package de.whitescan.api.utils;
+package de.whitescan.api.bukkit.utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

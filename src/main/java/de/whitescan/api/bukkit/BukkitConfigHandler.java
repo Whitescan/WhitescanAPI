@@ -10,7 +10,7 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
-import de.whitescan.api.internal.AbstractConfigHandler;
+import de.whitescan.api.share.config.AbstractConfigHandler;
 
 /**
  *
