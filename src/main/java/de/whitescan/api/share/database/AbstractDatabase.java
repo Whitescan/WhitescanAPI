@@ -1,4 +1,4 @@
-package de.whitescan.api.internal;
+package de.whitescan.api.share.database;
 
 import java.sql.Connection;
 import java.sql.SQLException;

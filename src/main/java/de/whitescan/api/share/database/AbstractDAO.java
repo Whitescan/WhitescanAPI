@@ -2,8 +2,6 @@ package de.whitescan.api.share.database;
 
 import java.util.logging.Logger;
 
-import de.whitescan.api.internal.AbstractDatabase;
-
 /**
  *
  * @author Whitescan
