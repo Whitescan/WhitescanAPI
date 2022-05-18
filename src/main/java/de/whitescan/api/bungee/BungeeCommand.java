@@ -1,9 +1,11 @@
 package de.whitescan.api.bungee;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import de.whitescan.api.share.AncientMessageService;
+import lombok.Getter;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.TabExecutor;
@@ -15,12 +17,19 @@ import net.md_5.bungee.api.plugin.TabExecutor;
  */
 public abstract class BungeeCommand extends Command implements TabExecutor {
 
-	public BungeeCommand(String name, String permission, String[] aliases) {
+	@Getter
+	private TextComponent noPermissionMessage;
+
+	public BungeeCommand(String name, String permission, String[] aliases, TextComponent noPermissionMessage) {
 		super(name, permission, aliases);
+		this.noPermissionMessage = noPermissionMessage;
+		setPermissionMessage(noPermissionMessage.getText());
 	}
 
-	public BungeeCommand(String name, String permission) {
+	public BungeeCommand(String name, String permission, TextComponent noPermissionMessage) {
 		super(name, permission, new String[] {});
+		this.noPermissionMessage = noPermissionMessage;
+		setPermissionMessage(noPermissionMessage.getText());
 	}
 
 	@Override
@@ -30,7 +39,7 @@ public abstract class BungeeCommand extends Command implements TabExecutor {
 			executeCommand(sender, args);
 
 		} else {
-			sender.sendMessage(AncientMessageService.NO_PERMISSION);
+			sender.sendMessage(getNoPermissionMessage());
 		}
 
 	}
@@ -48,6 +57,6 @@ public abstract class BungeeCommand extends Command implements TabExecutor {
 
 	}
 
-	protected abstract Iterable<String> tabComplete(ProxiedPlayer actor, String[] args);
+	protected abstract List<String> tabComplete(ProxiedPlayer actor, String[] args);
 
 }

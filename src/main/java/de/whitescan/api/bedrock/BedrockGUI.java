@@ -12,7 +12,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 /**
- * 
+ *
  * @author Whitescan
  *
  */

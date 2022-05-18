@@ -16,7 +16,7 @@ import de.whitescan.api.utils.BukkitUtils.SkinMethod;
 import lombok.NonNull;
 
 /**
- * 
+ *
  * @author Whitescan
  *
  */
@@ -35,7 +35,7 @@ public class SimpleBukkitMultiPageGUI extends BukkitMultiPageGUI {
 				"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjZkYWI3MjcxZjRmZjA0ZDU0NDAyMTkwNjdhMTA5YjVjMGMxZDFlMDFlYzYwMmMwMDIwNDc2ZjdlYjYxMjE4MCJ9fX0=",
 				"§6§lPrivious Page");
 
-		Map<Integer, ItemStack> navbar = new HashMap<Integer, ItemStack>();
+		Map<Integer, ItemStack> navbar = new HashMap<>();
 		navbar.put(45, previousPage);
 		navbar.put(53, nextPage);
 		setNavbar(navbar);
@@ -50,7 +50,7 @@ public class SimpleBukkitMultiPageGUI extends BukkitMultiPageGUI {
 		this.nextPage = nextPage;
 		this.previousPage = previousPage;
 
-		Map<Integer, ItemStack> navbar = new HashMap<Integer, ItemStack>();
+		Map<Integer, ItemStack> navbar = new HashMap<>();
 		navbar.put(45, previousPage);
 		navbar.put(53, nextPage);
 		setNavbar(navbar);

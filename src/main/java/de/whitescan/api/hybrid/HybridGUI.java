@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.NonNull;
 
 /**
- * 
+ *
  * @author Whitescan
  *
  */

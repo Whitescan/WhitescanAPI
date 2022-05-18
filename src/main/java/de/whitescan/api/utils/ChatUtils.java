@@ -7,9 +7,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Text;
 
 /**
- * 
+ *
  * @author Whitescan
  *
  */
@@ -26,6 +30,36 @@ public class ChatUtils {
 	private static final Pattern IP_PATTERN = Pattern.compile("(?<!\\d|\\d\\.)"
 			+ "(?:[01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "(?:[01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
 			+ "(?:[01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "(?:[01]?\\d\\d?|2[0-4]\\d|25[0-5])" + "(?!\\d|\\.\\d)");
+
+	public static TextComponent createMessage(String message) {
+		TextComponent textComponent = new TextComponent(message);
+		return textComponent;
+	}
+
+	public static TextComponent createMessage(String message, ClickEvent.Action action, String clickText,
+			String hoverText) {
+		TextComponent textComponent = createMessage(message);
+		textComponent.setClickEvent(new ClickEvent(action, clickText));
+		textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(hoverText)));
+		return textComponent;
+	}
+
+	public static TextComponent createCommandMessage(String message, String hoverText, String command) {
+
+		if (command.startsWith("/"))
+			command = "/" + command;
+
+		return createMessage(message, ClickEvent.Action.RUN_COMMAND, command, hoverText);
+
+	}
+
+	public static TextComponent createUrlMessage(String message, String hoverText, String url) {
+		return createMessage(message, ClickEvent.Action.OPEN_URL, url, hoverText);
+	}
+
+	public static TextComponent createCopyMessage(String message, String hover, String copyText) {
+		return createMessage(message, ClickEvent.Action.COPY_TO_CLIPBOARD, copyText, hover);
+	}
 
 	/**
 	 * Translate HEX codes in chat components.
@@ -114,8 +148,8 @@ public class ChatUtils {
 
 					boolean ignore = false;
 
-					for (int pos = 0; pos < ignoreCheck.length; pos++) {
-						if (input.contains(ignoreCheck[pos])) {
+					for (String element : ignoreCheck) {
+						if (input.contains(element)) {
 							ignore = true;
 							break;
 						}
@@ -151,7 +185,7 @@ public class ChatUtils {
 	}
 
 	public static boolean containsIP(String input) {
-		
+
 		if (input == null || input.isBlank())
 			return false;
 
