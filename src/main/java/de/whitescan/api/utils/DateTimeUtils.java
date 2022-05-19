@@ -1,4 +1,4 @@
-package de.whitescan.api.share.utils;
+package de.whitescan.api.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

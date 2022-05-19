@@ -1,4 +1,4 @@
-package de.whitescan.api.share.database;
+package de.whitescan.api.database;
 
 import java.sql.DriverManager;
 import java.util.logging.Logger;
